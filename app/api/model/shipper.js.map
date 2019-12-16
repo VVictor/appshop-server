@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\model\\shipper.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "getShipperNameByCode",
+        "shipperCode",
+        "where",
+        "code",
+        "getField",
+        "getShipperById",
+        "shipperId",
+        "id",
+        "find"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACvC;;;;;AAKMC,wBAAN,CAA2BC,WAA3B,EAAwC;AAAA;;AAAA;AACpC,mBAAO,MAAKC,KAAL,CAAW;AACdC,sBAAMF;AADQ,aAAX,EAEJG,QAFI,CAEK,MAFL,EAEa,IAFb,CAAP;AADoC;AAIvC;AACD;;;;;AAKMC,kBAAN,CAAqBC,SAArB,EAAgC;AAAA;;AAAA;AAC5B,mBAAO,OAAKJ,KAAL,CAAW;AACdK,oBAAID;AADU,aAAX,EAEJE,IAFI,EAAP;AAD4B;AAI/B;AApBsC,CAA3C",
+    "file": "..\\..\\..\\src\\api\\model\\shipper.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Model {\n    /**\n     * 根据快递公司编码获取名称\n     * @param shipperCode\n     * @returns {Promise.<*>}\n     */\n    async getShipperNameByCode(shipperCode) {\n        return this.where({\n            code: shipperCode\n        }).getField('name', true);\n    }\n    /**\n     * 根据 id 获取快递公司信息\n     * @param shipperId\n     * @returns {Promise.<*>}\n     */\n    async getShipperById(shipperId) {\n        return this.where({\n            id: shipperId\n        }).find();\n    }\n};"
+    ]
+}

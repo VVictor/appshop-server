@@ -1,0 +1,36 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\config.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "default_module",
+        "weixin",
+        "appid",
+        "secret",
+        "mch_id",
+        "partner_key",
+        "notify_url",
+        "express",
+        "appkey",
+        "request_url",
+        "mianexpress",
+        "print_url",
+        "ip_server_url",
+        "qiniu",
+        "access_key",
+        "secret_key",
+        "bucket",
+        "domain",
+        "aliexpress",
+        "url",
+        "appcode"
+    ],
+    "mappings": "AAAA;AACAA,OAAOC,OAAP,GAAiB;AACbC,oBAAgB,KADH;AAEbC,YAAQ;AACPC,eAAO,oBADA,EACsB;AAC1BC,gBAAQ,kCAFJ,EAEwC;AAC5CC,gBAAQ,aAHJ,EAGmB;AACvBC,qBAAa,uBAJT,EAIkC;AACtCC,oBAAY,qCALR,CAK8C;AAL9C,KAFK;AASbC,aAAS;AACL;AACAL,eAAO,UAFF,EAEc;AACnBM,gBAAQ,0BAHH,EAG+B;AACpCC,qBAAa;AAJR,KATI;AAedC,iBAAY;AACPR,eAAO,QADA,EACU;AACjBM,gBAAQ,yBAFD,EAE4B;AACnCC,qBAAa,kDAHN;AAIPE,mBAAW,8EAJJ;AAKPC,uBAAc;AALP,KAfE;AAsBbC,WAAO;AACHC,oBAAY,sBADT,EACsC;AACzCC,oBAAY,wBAFT,EAEsC;AACzCC,gBAAQ,YAHL,EAGsC;AACzCC,gBAAQ,8BAJL,CAIsC;AAJtC,KAtBM;AA4BbC,gBAAW;AACPC,aAAI,yCADG,EACwC;AAC/CC,iBAAS;AAFF;AA5BE,CAAjB",
+    "file": "..\\..\\..\\src\\common\\config\\config.js",
+    "sourcesContent": [
+        "// default config\nmodule.exports = {\n    default_module: 'api',\n    weixin: {\n     appid: 'wxa2ab1eb357d16eeb', // 小程序 appid\n        secret: '476e4a3c4ea4329f045eb87657989774', // 小程序密钥\n        mch_id: '15988888888', // 商户帐号ID\n        partner_key: 'asdasdasdasdasdasdasd', // 微信支付密钥\n        notify_url: 'https://www.您的域名.com/api/pay/notify' // 微信异步通知\n    },\n    express: {\n        // 快递物流信息查询使用的是快递鸟接口，申请地址：http://www.kdniao.com/\n        appid: '12312312', // 对应快递鸟用户后台 用户ID\n        appkey: '123123123123123123123123', // 对应快递鸟用户后台 API key\n        request_url: 'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx'\n    },\n   mianexpress:{\n        appid: '123123', // 对应快递鸟用户后台 用户ID\n        appkey: '71012-4e66-94cb5297309a', // 对应快递鸟用户后台 API key\n        request_url: 'http://testapi.kdniao.com:8081/api/EOrderService',\n        print_url: 'http://sandboxapi.kdniao.com:8080/kdniaosandbox/gateway/exterfaceInvoke.json',\n        ip_server_url:'http://www.kdniao.com/External/GetIp.aspx'\n    },\n    qiniu: {\n        access_key: 'asdlakjsdlajlajsdlas',      //在七牛密钥管理中获取\n        secret_key: 'alskdjalksjdlasjdlajsd',    //在七牛密钥管理中获取\n        bucket: 'bucketname',                    // bucket的名称\n        domain: 'http://pic.meiweiyuxian.com/'   // domain域名\n    },\n    aliexpress:{\n        url:'http://wuliu.market.alicloudapi.com/kdi', //阿里云的短信api，收费的\n        appcode: 'asldjalsjdlasjdla'\n    }\n};\n"
+    ]
+}

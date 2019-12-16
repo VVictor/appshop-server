@@ -1,0 +1,36 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\base.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "__before",
+        "token",
+        "ctx",
+        "header",
+        "tokenSerivce",
+        "service",
+        "userId",
+        "getUserId",
+        "publicController",
+        "config",
+        "publicAction",
+        "controllerAction",
+        "controller",
+        "action",
+        "getTime",
+        "parseInt",
+        "Date",
+        "now",
+        "getLoginUserId"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AACtCC,YAAN,GAAiB;AAAA;;AAAA;AACb;AACAF,kBAAMG,KAAN,GAAc,MAAKC,GAAL,CAASC,MAAT,CAAgB,kBAAhB,KAAuC,EAArD;AACA,kBAAMC,eAAeN,MAAMO,OAAN,CAAc,OAAd,EAAuB,KAAvB,CAArB;AACAP,kBAAMQ,MAAN,GAAe,MAAMF,aAAaG,SAAb,EAArB;AACA,kBAAMC,mBAAmB,MAAKC,MAAL,CAAY,kBAAZ,CAAzB;AACA,kBAAMC,eAAe,MAAKD,MAAL,CAAY,cAAZ,CAArB;AACA;AACA,kBAAME,mBAAmB,MAAKT,GAAL,CAASU,UAAT,GAAsB,GAAtB,GAA4B,MAAKV,GAAL,CAASW,MAA9D;AACA;AACA;AACA;AACA;AACA;AAba;AAchB;AACD;;;;AAIAC,cAAU;AACN,eAAOC,SAASC,KAAKC,GAAL,KAAa,IAAtB,CAAP;AACH;AACD;;;;AAIAC,qBAAiB;AACb,eAAOpB,MAAMQ,MAAb;AACH;AACD;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AA1C4C,CAAhD",
+    "file": "..\\..\\..\\src\\api\\controller\\base.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Controller {\n    async __before() {\n        // 根据token值获取用户id\n        think.token = this.ctx.header['x-nideshop-token'] || '';\n        const tokenSerivce = think.service('token', 'api');\n        think.userId = await tokenSerivce.getUserId();\n        const publicController = this.config('publicController');\n        const publicAction = this.config('publicAction');\n        // 如果为非公开，则验证用户是否登录\n        const controllerAction = this.ctx.controller + '/' + this.ctx.action;\n        // if (!publicController.includes(this.ctx.controller) && !publicAction.includes(controllerAction)) {\n        //   if (think.userId <= 0) {\n        //     return this.fail(401, '请先登录');\n        //   }\n        // }\n    }\n    /**\n     * 获取时间戳\n     * @returns {Number}\n     */\n    getTime() {\n        return parseInt(Date.now() / 1000);\n    }\n    /**\n     * 获取当前登录用户的id\n     * @returns {*}\n     */\n    getLoginUserId() {\n        return think.userId;\n    }\n    //  timestampToTime (unixtimestamp){  \n    //    var unixtimestamp = new Date(unixtimestamp*1000);  \n    //    var year = 1900 + unixtimestamp.getYear();  \n    //    var month = \"0\" + (unixtimestamp.getMonth() + 1);  \n    //    var date = \"0\" + unixtimestamp.getDate();  \n    //    var hour = \"0\" + unixtimestamp.getHours();  \n    //    var minute = \"0\" + unixtimestamp.getMinutes();  \n    //    var second = \"0\" + unixtimestamp.getSeconds();  \n    //    return year + \"-\" + month.substring(month.length-2, month.length)  + \"-\" + date.substring(date.length-2, date.length)  \n    //        + \" \" + hour.substring(hour.length-2, hour.length) + \":\"  \n    //        + minute.substring(minute.length-2, minute.length) + \":\"  \n    //        + second.substring(second.length-2, second.length);  \n    // } \n};"
+    ]
+}

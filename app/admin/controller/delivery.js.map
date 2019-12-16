@@ -1,0 +1,24 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\delivery.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "data",
+        "model",
+        "where",
+        "id",
+        "select",
+        "success"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAChC;;;;AAIMI,eAAN,GAAoB;AAAA;;AAAA;AAChB,kBAAMC,OAAO,MAAM,MAAKC,KAAL,CAAW,SAAX,EAAsBC,KAAtB,CAA4B;AAC3CC,oBAAI,CAAC,IAAD,EAAO,CAAP;AADuC,aAA5B,EAEhBC,MAFgB,EAAnB;AAGA,mBAAO,MAAKC,OAAL,CAAaL,IAAb,CAAP;AAJgB;AAKnB;AAV+B,CAApC",
+    "file": "..\\..\\..\\src\\admin\\controller\\delivery.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\nmodule.exports = class extends Base {\n    /**\n     * index action\n     * @return {Promise} []\n     */\n    async indexAction() {\n        const data = await this.model('shipper').where({\n            id: ['<>', 0]\n        }).select();\n        return this.success(data);\n    }\n};"
+    ]
+}

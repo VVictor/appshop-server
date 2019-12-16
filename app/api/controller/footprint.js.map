@@ -1,0 +1,51 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\footprint.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "moment",
+        "_",
+        "module",
+        "exports",
+        "deleteAction",
+        "footprintId",
+        "post",
+        "userId",
+        "think",
+        "model",
+        "where",
+        "user_id",
+        "id",
+        "delete",
+        "success",
+        "listAction",
+        "page",
+        "get",
+        "size",
+        "list",
+        "alias",
+        "join",
+        "table",
+        "as",
+        "on",
+        "order",
+        "add_time",
+        "field",
+        "countSelect",
+        "item",
+        "data",
+        "goods",
+        "goods_id",
+        "find",
+        "unix",
+        "format"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA,MAAMC,SAASD,QAAQ,QAAR,CAAf;AACA,MAAME,IAAIF,QAAQ,QAAR,CAAV;AACAG,OAAOC,OAAP,GAAiB,cAAcL,IAAd,CAAmB;AAChC;;;;AAIMM,gBAAN,GAAqB;AAAA;;AAAA;AACjB,kBAAMC,cAAc,MAAKC,IAAL,CAAU,aAAV,CAApB;AACA,kBAAMC,SAASC,MAAMD,MAArB;AACA;AACA,kBAAM,MAAKE,KAAL,CAAW,WAAX,EAAwBC,KAAxB,CAA8B;AAChCC,yBAASJ,MADuB;AAEhCK,oBAAIP;AAF4B,aAA9B,EAGHQ,MAHG,EAAN;AAIA,mBAAO,MAAKC,OAAL,CAAa,MAAb,CAAP;AARiB;AASpB;AACD;;;;AAIMC,cAAN,GAAmB;AAAA;;AAAA;AACf,kBAAMC,OAAO,OAAKC,GAAL,CAAS,MAAT,CAAb;AACA,kBAAMC,OAAO,OAAKD,GAAL,CAAS,MAAT,CAAb;AACA,kBAAME,OAAO,MAAM,OAAKV,KAAL,CAAW,WAAX,EAAwBW,KAAxB,CAA8B,GAA9B,EAAmCC,IAAnC,CAAwC;AACvDC,uBAAO,OADgD;AAEvDD,sBAAM,MAFiD;AAGvDE,oBAAI,GAHmD;AAIvDC,oBAAI,CAAC,YAAD,EAAe,MAAf;AAJmD,aAAxC,EAKhBd,KALgB,CAKV;AACLC,yBAASH,MAAMD;AADV,aALU,EAOhBS,IAPgB,CAOXA,IAPW,EAOLE,IAPK,EAOCO,KAPD,CAOO;AACtBC,0BAAU;AADY,aAPP,EAShBC,KATgB,CASV,sBATU,EAScC,WATd,EAAnB;AAUA,iBAAK,MAAMC,IAAX,IAAmBV,KAAKW,IAAxB,EAA8B;AAC1B,oBAAIC,QAAQ,MAAM,OAAKtB,KAAL,CAAW,OAAX,EAAoBC,KAApB,CAA0B;AACxCE,wBAAGiB,KAAKG;AADgC,iBAA1B,EAEfL,KAFe,CAET,0EAFS,EAEmEM,IAFnE,EAAlB;AAGAJ,qBAAKH,QAAL,GAAgB1B,OAAOkC,IAAP,CAAYL,KAAKH,QAAjB,EAA2BS,MAA3B,CAAkC,YAAlC,CAAhB;AACAN,qBAAKE,KAAL,GAAaA,KAAb;AACA,oBAAI/B,SAASmC,MAAT,CAAgB,YAAhB,KAAiCN,KAAKH,QAA1C,EAAoD;AAChDG,yBAAKH,QAAL,GAAgB,IAAhB;AACH;AACJ;AACD,mBAAO,OAAKZ,OAAL,CAAaK,IAAb,CAAP;AAvBe;AAwBlB;AA3C+B,CAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\footprint.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\nconst moment = require('moment');\nconst _ = require('lodash');\nmodule.exports = class extends Base {\n    /**\n     *\n     * @returns {Promise<void|Promise|PreventPromise>}\n     */\n    async deleteAction() {\n        const footprintId = this.post('footprintId');\n        const userId = think.userId;    \n        // 删除当天的同一个商品的足迹\n        await this.model('footprint').where({\n            user_id: userId,\n            id: footprintId\n        }).delete();\n        return this.success('删除成功');\n    }\n    /**\n     * list action\n     * @return {Promise} []\n     */\n    async listAction() {\n        const page = this.get('page');\n        const size = this.get('size');\n        const list = await this.model('footprint').alias('f').join({\n            table: 'goods',\n            join: 'left',\n            as: 'g',\n            on: ['f.goods_id', 'g.id']\n        }).where({\n            user_id: think.userId\n        }).page(page, size).order({\n            add_time: 'desc'\n        }).field('id,goods_id,add_time').countSelect();\n        for (const item of list.data) {\n            let goods = await this.model('goods').where({\n                id:item.goods_id\n            }).field('name,goods_brief,retail_price,list_pic_url,goods_number,min_retail_price').find();\n            item.add_time = moment.unix(item.add_time).format('YYYY-MM-DD');\n            item.goods = goods;\n            if (moment().format('YYYY-MM-DD') == item.add_time) {\n                item.add_time = '今天';\n            }\n        }\n        return this.success(list);\n    }\n};"
+    ]
+}

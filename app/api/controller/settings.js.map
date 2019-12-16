@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\settings.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "showSettingsAction",
+        "info",
+        "model",
+        "where",
+        "id",
+        "find",
+        "success",
+        "saveAction",
+        "name",
+        "post",
+        "mobile",
+        "myreg",
+        "length",
+        "fail",
+        "test",
+        "data",
+        "name_mobile",
+        "think",
+        "userId",
+        "update",
+        "userDetailAction",
+        "field"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC1BI,sBAAN,GAA2B;AAAA;;AAAA;AACvB,gBAAIC,OAAO,MAAM,MAAKC,KAAL,CAAW,eAAX,EAA4BC,KAA5B,CAAkC;AAC/CC,oBAAI;AAD2C,aAAlC,EAEdC,IAFc,EAAjB;AAGA,mBAAO,MAAKC,OAAL,CAAaL,IAAb,CAAP;AAJuB;AAK1B;AACKM,cAAN,GAAmB;AAAA;;AAAA;AACf,gBAAIC,OAAO,OAAKC,IAAL,CAAU,MAAV,CAAX;AACA,gBAAIC,SAAS,OAAKD,IAAL,CAAU,QAAV,CAAb;AACA,gBAAIE,QAAQ,2FAAZ;AACA,gBAAID,OAAOE,MAAP,GAAgB,EAApB,EAAwB;AACpB,uBAAO,OAAKC,IAAL,CAAU,GAAV,EAAe,MAAf,CAAP;AACH,aAFD,MAEO,IAAI,CAACF,MAAMG,IAAN,CAAWJ,MAAX,CAAL,EAAyB;AAC5B,uBAAO,OAAKG,IAAL,CAAU,GAAV,EAAe,OAAf,CAAP;AACH;AACD,gBAAIL,QAAQ,EAAR,IAAcE,UAAU,EAA5B,EAAgC;AAC5B,uBAAO,OAAKG,IAAL,CAAU,GAAV,EAAe,MAAf,CAAP;AACH;AACD,gBAAIE,OAAO;AACPP,sBAAMA,IADC;AAEPE,wBAAQA,MAFD;AAGPM,6BAAa;AAHN,aAAX;AAKA,gBAAIf,OAAO,MAAM,OAAKC,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB;AACtCC,oBAAIa,MAAMC;AAD4B,aAAzB,EAEdC,MAFc,CAEPJ,IAFO,CAAjB;AAGA,mBAAO,OAAKT,OAAL,CAAaL,IAAb,CAAP;AApBe;AAqBlB;AACKmB,oBAAN,GAAyB;AAAA;;AAAA;AACrB,gBAAInB,OAAO,MAAM,OAAKC,KAAL,CAAW,MAAX,EAAmBC,KAAnB,CAAyB;AACtCC,oBAAIa,MAAMC;AAD4B,aAAzB,EAEdG,KAFc,CAER,aAFQ,EAEOhB,IAFP,EAAjB;AAGA,mBAAO,OAAKC,OAAL,CAAaL,IAAb,CAAP;AAJqB;AAKxB;AAlC+B,CAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\settings.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\nmodule.exports = class extends Base {\n    async showSettingsAction() {\n        let info = await this.model('show_settings').where({\n            id: 1\n        }).find();\n        return this.success(info);\n    }\n    async saveAction() {\n        let name = this.post('name');\n        let mobile = this.post('mobile');\n        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(16[0-9]{1})|(19[0-9]{1}))+\\d{8})$/;\n        if (mobile.length < 11) {\n            return this.fail(200, '长度不对');\n        } else if (!myreg.test(mobile)) {\n            return this.fail(300, '手机不对哦');\n        }\n        if (name == '' || mobile == '') {\n            return this.fail(100, '不能为空')\n        }\n        let data = {\n            name: name,\n            mobile: mobile,\n            name_mobile: 1\n        };\n        let info = await this.model('user').where({\n            id: think.userId\n        }).update(data);\n        return this.success(info);\n    }\n    async userDetailAction() {\n        let info = await this.model('user').where({\n            id: think.userId\n        }).field('mobile,name').find();\n        return this.success(info);\n    }\n};"
+    ]
+}

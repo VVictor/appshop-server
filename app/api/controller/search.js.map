@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\api\\controller\\search.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "defaultKeyword",
+        "model",
+        "where",
+        "is_default",
+        "limit",
+        "find",
+        "hotKeywordList",
+        "distinct",
+        "field",
+        "select",
+        "historyKeywordList",
+        "user_id",
+        "think",
+        "userId",
+        "getField",
+        "success",
+        "helperAction",
+        "keyword",
+        "get",
+        "keywords",
+        "clearHistoryAction",
+        "delete"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;AACA;AACAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC1BI,eAAN,GAAoB;AAAA;;AAAA;AAChB;AACA,kBAAMC,iBAAiB,MAAM,MAAKC,KAAL,CAAW,UAAX,EAAuBC,KAAvB,CAA6B;AACtDC,4BAAY;AAD0C,aAA7B,EAE1BC,KAF0B,CAEpB,CAFoB,EAEjBC,IAFiB,EAA7B;AAGA;AACA,kBAAMC,iBAAiB,MAAM,MAAKL,KAAL,CAAW,UAAX,EAAuBM,QAAvB,CAAgC,SAAhC,EAA2CC,KAA3C,CAAiD,CAAC,SAAD,EAAY,QAAZ,CAAjD,EAAwEJ,KAAxE,CAA8E,EAA9E,EAAkFK,MAAlF,EAA7B;AACA,kBAAMC,qBAAqB,MAAM,MAAKT,KAAL,CAAW,gBAAX,EAA6BM,QAA7B,CAAsC,SAAtC,EAAiDL,KAAjD,CAAuD;AACpFS,yBAASC,MAAMC;AADqE,aAAvD,EAE9BT,KAF8B,CAExB,EAFwB,EAEpBU,QAFoB,CAEX,SAFW,CAAjC;AAGA,mBAAO,MAAKC,OAAL,CAAa;AAChBf,gCAAgBA,cADA;AAEhBU,oCAAoBA,kBAFJ;AAGhBJ,gCAAgBA;AAHA,aAAb,CAAP;AAVgB;AAenB;AACKU,gBAAN,GAAqB;AAAA;;AAAA;AACjB,kBAAMC,UAAU,OAAKC,GAAL,CAAS,SAAT,CAAhB;AACA,kBAAMC,WAAW,MAAM,OAAKlB,KAAL,CAAW,UAAX,EAAuBM,QAAvB,CAAgC,SAAhC,EAA2CL,KAA3C,CAAiD;AACpEe,yBAAS,CAAC,MAAD,EAASA,UAAU,GAAnB;AAD2D,aAAjD,EAEpBH,QAFoB,CAEX,SAFW,EAEA,EAFA,CAAvB;AAGA,mBAAO,OAAKC,OAAL,CAAaI,QAAb,CAAP;AALiB;AAMpB;AACKC,sBAAN,GAA2B;AAAA;;AAAA;AACvB,kBAAM,OAAKnB,KAAL,CAAW,gBAAX,EAA6BC,KAA7B,CAAmC;AACrCS,yBAASC,MAAMC;AADsB,aAAnC,EAEHQ,MAFG,EAAN;AAGA,mBAAO,OAAKN,OAAL,EAAP;AAJuB;AAK1B;AA7B+B,CAApC",
+    "file": "..\\..\\..\\src\\api\\controller\\search.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n//TODO 在后台搜索那里完善，采用专门的搜索开发库\nmodule.exports = class extends Base {\n    async indexAction() {\n        // 取出输入框默认的关键词\n        const defaultKeyword = await this.model('keywords').where({\n            is_default: 1\n        }).limit(1).find();\n        // 取出热闹关键词\n        const hotKeywordList = await this.model('keywords').distinct('keyword').field(['keyword', 'is_hot']).limit(10).select();\n        const historyKeywordList = await this.model('search_history').distinct('keyword').where({\n            user_id: think.userId\n        }).limit(10).getField('keyword');\n        return this.success({\n            defaultKeyword: defaultKeyword,\n            historyKeywordList: historyKeywordList,\n            hotKeywordList: hotKeywordList\n        });\n    }\n    async helperAction() {\n        const keyword = this.get('keyword');\n        const keywords = await this.model('keywords').distinct('keyword').where({\n            keyword: ['like', keyword + '%']\n        }).getField('keyword', 10);\n        return this.success(keywords);\n    }\n    async clearHistoryAction() {\n        await this.model('search_history').where({\n            user_id: think.userId\n        }).delete();\n        return this.success();\n    }\n};"
+    ]
+}

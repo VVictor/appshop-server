@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\middleware.js"
+    ],
+    "names": [
+        "path",
+        "require",
+        "isDev",
+        "think",
+        "env",
+        "kcors",
+        "module",
+        "exports",
+        "handle",
+        "options",
+        "logRequest",
+        "sendResponseTime",
+        "enable",
+        "root",
+        "join",
+        "ROOT_PATH",
+        "publicPath",
+        "isCli",
+        "debug",
+        "defaultModule",
+        "defaultController",
+        "defaultAction"
+    ],
+    "mappings": "AAAA,MAAMA,OAAOC,QAAQ,MAAR,CAAb;AACA,MAAMC,QAAQC,MAAMC,GAAN,KAAc,aAA5B;AACA,MAAMC,QAAQJ,QAAQ,OAAR,CAAd;AACAK,OAAOC,OAAP,GAAiB,CAAC;AACdC,YAAQH,KADM,EACC;AACfI,aAAS;AAFK,CAAD,EAGd;AACCD,YAAQ,MADT;AAECC,aAAS;AACLC,oBAAYR,KADP;AAELS,0BAAkBT;AAFb;AAFV,CAHc,EASd;AACCM,YAAQ,UADT;AAEC;AACAI,YAAQ,IAHT;AAICH,aAAS;AACLI,cAAMb,KAAKc,IAAL,CAAUX,MAAMY,SAAhB,EAA2B,KAA3B,CADD;AAELC,oBAAY;AAFP;AAJV,CATc,EAiBd;AACCR,YAAQ,OADT;AAECI,YAAQ,CAACT,MAAMc,KAFhB;AAGCR,aAAS;AACLS,eAAOhB;AADF;AAHV,CAjBc,EAuBd;AACCM,YAAQ,SADT;AAECC,aAAS;AAFV,CAvBc,EA0Bd;AACCD,YAAQ,QADT;AAECC,aAAS;AACLU,uBAAe,KADV;AAELC,2BAAmB,OAFd;AAGLC,uBAAe;AAHV;AAFV,CA1Bc,EAiCd,OAjCc,EAiCL,YAjCK,CAAjB",
+    "file": "..\\..\\..\\src\\common\\config\\middleware.js",
+    "sourcesContent": [
+        "const path = require('path');\nconst isDev = think.env === 'development';\nconst kcors = require('kcors');\nmodule.exports = [{\n    handle: kcors, // 处理跨域\n    options: {}\n}, {\n    handle: 'meta',\n    options: {\n        logRequest: isDev,\n        sendResponseTime: isDev\n    }\n}, {\n    handle: 'resource',\n    // enable: isDev,\n    enable: true,\n    options: {\n        root: path.join(think.ROOT_PATH, 'www'),\n        publicPath: /^\\/(static|favicon\\.ico)/\n    }\n}, {\n    handle: 'trace',\n    enable: !think.isCli,\n    options: {\n        debug: isDev\n    }\n}, {\n    handle: 'payload',\n    options: {}\n}, {\n    handle: 'router',\n    options: {\n        defaultModule: 'api',\n        defaultController: 'index',\n        defaultAction: 'index'\n    }\n}, 'logic', 'controller'];"
+    ]
+}

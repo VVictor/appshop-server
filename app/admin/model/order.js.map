@@ -1,0 +1,47 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\model\\order.js"
+    ],
+    "names": [
+        "_",
+        "require",
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "generateOrderNumber",
+        "date",
+        "Date",
+        "getFullYear",
+        "padStart",
+        "getMonth",
+        "getDay",
+        "getHours",
+        "getMinutes",
+        "getSeconds",
+        "random",
+        "getOrderHandleOption",
+        "orderId",
+        "handleOption",
+        "cancel",
+        "delete",
+        "pay",
+        "delivery",
+        "confirm",
+        "buy",
+        "orderInfo",
+        "where",
+        "id",
+        "find",
+        "order_status",
+        "getOrderStatusText",
+        "statusText",
+        "getOrderBtnText"
+    ],
+    "mappings": "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",
+    "file": "..\\..\\..\\src\\admin\\model\\order.js",
+    "sourcesContent": [
+        "const _ = require('lodash');\nmodule.exports = class extends think.Model {\n    /**\n     * 生成订单的编号order_sn\n     * @returns {string}\n     */\n    generateOrderNumber() {\n        const date = new Date();\n        return date.getFullYear() + _.padStart(date.getMonth(), 2, '0') + _.padStart(date.getDay(), 2, '0') + _.padStart(date.getHours(), 2, '0') + _.padStart(date.getMinutes(), 2, '0') + _.padStart(date.getSeconds(), 2, '0') + _.random(100000, 999999);\n    }\n    /**\n     * 获取订单可操作的选项\n     * @param orderId\n     */\n    async getOrderHandleOption(orderId) {\n        const handleOption = {\n            cancel: false, // 取消操作\n            delete: false, // 删除操作\n            pay: false, // 支付操作\n            delivery: false, // 确认收货操作\n            confirm: false, // 完成订单操作\n            buy: false // 再次购买\n        };\n        const orderInfo = await this.where({\n            id: orderId\n        }).find();\n        // 订单流程：下单成功－》支付订单－》发货－》收货－》评论\n        // 订单相关状态字段设计，采用单个字段表示全部的订单状态\n        // 1xx表示订单取消和删除等状态 0订单创建成功等待付款，101订单已取消，102订单已删除\n        // 2xx表示订单支付状态,201订单已付款，等待发货\n        // 3xx表示订单物流相关状态,300订单已发货，301用户确认收货\n        // 4xx表示订单退换货相关的状态,401没有发货，退款402,已收货，退款退货\n        // 如果订单已经取消或是已完成，则可删除和再次购买\n        if (orderInfo.order_status === 101) {\n            handleOption.delete = true;\n            handleOption.buy = true;\n        }\n        // 如果订单没有被取消，且没有支付，则可支付，可取消\n        if (orderInfo.order_status === 0) {\n            handleOption.cancel = true;\n            handleOption.pay = true;\n        }\n        // 如果订单已经发货，没有收货，则可收货操作和退款、退货操作\n        if (orderInfo.order_status === 300) {\n            handleOption.cancel = true;\n            handleOption.pay = true;\n        }\n        // 如果订单已经支付，且已经收货，则可完成交易、评论和再次购买\n        if (orderInfo.order_status === 301) {\n            handleOption.delete = true;\n            handleOption.buy = true;\n        }\n        return handleOption;\n    }\n    async getOrderStatusText(orderId) {\n        const orderInfo = await this.where({\n            id: orderId\n        }).find();\n        let statusText = '';\n        switch (orderInfo.order_status) {\n            case 101:\n                statusText = '待付款';\n                break;\n            case 102:\n                statusText = '交易关闭';\n                break;\n            case 103:\n                statusText = '交易关闭'; //到时间系统自动取消\n                break;\n            case 201:\n                statusText = '待备货';\n                break;\n            case 300:\n                statusText = '待发货';\n                break;\n            case 301:\n                statusText = '已发货';\n                break;\n            case 302:\n                statusText = '待评价';\n                break;\n            case 303:\n                statusText = '待评价'; //到时间，未收货的系统自动收货、\n                break;\n            case 401:\n                statusText = '交易成功'; //到时间，未收货的系统自动收货、\n                break;\n        }\n        return statusText;\n    }\n    async getOrderBtnText(orderId) {\n        const orderInfo = await this.where({\n            id: orderId\n        }).find();\n        let statusText = '';\n        switch (orderInfo.order_status) {\n            case 101:\n                statusText = '修改价格';\n                break;\n            case 102:\n                statusText = '查看详情';\n                break;\n            case 103:\n                statusText = '查看详情'; //到时间系统自动取消\n                break;\n            case 201:\n                statusText = '备货';\n                break;\n            case 202:\n                statusText = '查看详情';\n                break;\n            case 203:\n                statusText = '查看详情';\n                break;\n            case 300:\n                statusText = '打印快递单';\n                break;\n            case 301:\n                statusText = '查看详情';\n                break;\n            case 302:\n                statusText = '查看详情';\n                break;\n            case 303:\n                statusText = '查看详情'; //到时间，未收货的系统自动收货、\n                break;\n            case 401:\n                statusText = '查看详情'; //到时间，未收货的系统自动收货、\n                break;\n        }\n        if (orderInfo.order_status == 301) {\n            statusText = '确认收货'\n        }\n        return statusText;\n    }\n};"
+    ]
+}
